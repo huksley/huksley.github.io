@@ -199,6 +199,11 @@ h1, h2, h3, h4, h5, h6 {
 	opacity: 0.4;
 }
 
+img#gravatar {
+	border-radius: 6px;
+	border: 1px solid #909090;
+}
+
 /*
 http://stackoverflow.com/questions/18516317/vertically-align-an-image-inside-a-div-with-responsive-height
 */
