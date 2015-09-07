@@ -24,14 +24,26 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-	<script src="aes.js"></script>
-	<script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-	<script>
+	<script defer="defer" src="aes.js"></script>
+	<script defer="defer" src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+	<script defer="defer">
 		var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
 		javascriptKey = CryptoJS.AES.decrypt(javascriptKey, String(window.location));
 		javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
 		Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
-		Parse.Analytics.track("index", {});
+		Parse.Analytics.track("index", { /* free-form fields? */ });
+	</script>
+
+	<script defer="defer">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-67275308-1']);
+		_gaq.push(['_trackPageview']);
+
+  		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
 	</script>
   </head>
 
