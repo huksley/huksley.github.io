@@ -23,30 +23,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-	<script defer="defer" src="aes.js"></script>
-	<script defer="defer" src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-	<script defer="defer">
-		var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
-		javascriptKey = CryptoJS.AES.decrypt(javascriptKey, String(window.location));
-		javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
-		Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
-		Parse.Analytics.track("index", { /* free-form fields? */ });
-	</script>
-
-	<script defer="defer">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-67275308-1']);
-		_gaq.push(['_trackPageview']);
-
-  		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
   </head>
-
   <body data-spy="scroll" data-target="#topnav">
 
     <!-- Static navbar -->
@@ -67,25 +44,24 @@
             <li><a href="#works">Работа и проекты</a></li>
             <li><a href="#social">Контакты</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div><!-- /.nav-collapse -->
       </div>
     </div>
 
-
     <section id="home">
-	<div id="headerwrap">
-	    <div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-lg-offset-3">
-					<img id="gravatar" src="https://avatars0.githubusercontent.com/u/1594349?v=3&s=460" width="128"/>
-					<h4>Всем привет, меня зовут</h4>
-					<h2>Гайнутдинов Руслан Фархатович</h2>
-					<h4>Ведущий архитектор</h4>
-					<h4>Enterprise Java · Business Intelligence · Web · SOA</h4>
-				</div>
-			</div><! --/row -->
-	    </div> <!-- /container -->
-	</div><! --/headerwrap -->
+		<div id="headerwrap">
+		    <div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-lg-offset-3">
+						<img id="gravatar" src="https://avatars0.githubusercontent.com/u/1594349?v=3&s=460" width="128"/>
+						<h4>Всем привет, меня зовут</h4>
+						<h2>Гайнутдинов Руслан Фархатович</h2>
+						<h4>Ведущий архитектор</h4>
+						<h4>Enterprise Java · Business Intelligence · Web · SOA</h4>
+					</div>
+				</div><!-- /row -->
+		    </div> <!--  /container -->
+		</div><!-- /headerwrap -->
 	</section>
 
 	<section id="works">
@@ -120,8 +96,8 @@
 					Open-Source
 				</div>
 			</div>
-		</div><! --/row -->
-	</div><! --/container -->
+		</div><!--/row -->
+	</div><!--/container -->
 	</section>
 
 	<div id="social">			
@@ -153,9 +129,9 @@
 						Резюме по <a href="mailto:ruslanfg@gmail.com?subject=Резюме">запросу</a>
 					</div>
 				</div>
-			</div><! --/row -->
-		</div><! --/container -->
-	</div><! --/social -->
+			</div><!--/row -->
+		</div><!--/container -->
+	</div><!--/social -->
 
 	<div id="footerwrap">
 		<div class="container">
@@ -172,14 +148,32 @@
 				</div>
 			</div>
 		</div>
-	</div><! --/footerwrap -->
+	</div><!--/footerwrap -->
 	
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+
+	<script src="aes.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+	<script type="text/javascript">
+		var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
+		javascriptKey = CryptoJS.AES.decrypt(javascriptKey, String(window.location));
+		javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
+		Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
+		Parse.Analytics.track("index", { /* free-form fields? */ });
+	</script>
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-67275308-1']);
+		_gaq.push(['_trackPageview']);
+
+  		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
   </body>
 </html>
