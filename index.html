@@ -23,6 +23,16 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+	<script src="aes.js"></script>
+	<script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+	<script>
+		var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
+		javascriptKey = CryptoJS.AES.decrypt(javascriptKey, String(window.location));
+		javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
+		Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
+		Parse.Analytics.track("index", {});
+	</script>
   </head>
 
   <body data-spy="scroll" data-target="#topnav">
