@@ -18,17 +18,26 @@ if (!window.localStorage) {
 }
 
 // internet
-// var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
+var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
 // local
-var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
+//var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
 var loc = String(window.location);
 if (loc.indexOf("#") > 0) {
 	loc = loc.substring(0, loc.indexOf("#"));
 }
 console.log("Location: " + loc);
-javascriptKey = CryptoJS.AES.decrypt(javascriptKey, loc);
-javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
-Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
+try {
+	javascriptKey = CryptoJS.AES.decrypt(javascriptKey, loc);
+	javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
+} catch (e) {
+	console.log("Failed JS key decryption: " + e);
+}
+
+try {
+	Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
+} catch (e) {
+	console.log("Failed parse.com API initialization: " + e);
+}
 
 var ipinfo = {};
 $.get("http://ipinfo.io", function(response) {
