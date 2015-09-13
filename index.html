@@ -56,7 +56,7 @@
 		// internet
 		var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
 		// local
-		// var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
+		//var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
 		var loc = String(window.location);
 		if (loc.indexOf("#") > 0) {
 			loc = loc.substring(0, loc.indexOf("#"));
@@ -66,8 +66,17 @@
 		javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
 		Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
 
-		console.log("Sending track event to Parse.com");
-		Parse.Analytics.track("index", { /* free-form fields? */ });
+		var ipinfo = {};
+		$.get("http://ipinfo.io", function(response) {
+			ipinfo = response;
+			console.log("Got ipinfo ", ipinfo);
+			Parse.Events.trigger("client:ipinfo");
+		}, "jsonp");
+
+		Parse.Events.on("client:ipinfo", function () {
+			console.log("Sending track event to Parse.com");
+			Parse.Analytics.track("index", ipinfo);
+		});
 
 		// Read configuration for site
 		var config = {
@@ -119,7 +128,7 @@
     	.flags {
     		float: left;
     		display: inline-block;
-    		padding-top: 6px;
+    		padding-top: 8px;
     		padding-right: 8px;
     		margin-left: 2px;
     		cursor: pointer;
