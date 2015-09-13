@@ -231,7 +231,14 @@ http://stackoverflow.com/questions/18516317/vertically-align-an-image-inside-a-d
 	display: inline-block;
 	padding-top: 8px;
 	margin-left: 2px;
+	padding-right: 4px;
 	cursor: pointer;
+}
+
+@media (min-width: 1px) {
+	body.grf .navband-brand {
+		margin-left: 0px !important;
+	}
 }
 
 .flags a,
