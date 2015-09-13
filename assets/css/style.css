@@ -13,11 +13,9 @@
    Base Styles, Bootstrap Modifications & Fonts Import
    ========================================================================== */
 
-/*@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);*/
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);*/
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
-
+@import url(../flags/flags.css);
 
 ::-moz-selection {
     background: #f2c2c9;
@@ -226,4 +224,25 @@ http://stackoverflow.com/questions/18516317/vertically-align-an-image-inside-a-d
  display: inline-block;
     vertical-align: middle;
     float: none;
+}
+
+.flags {
+	float: left;
+	display: inline-block;
+	padding-top: 8px;
+	margin-left: 2px;
+	cursor: pointer;
+}
+
+.flags a,
+.flags img {
+	outline: 0;
+}
+
+body.grf .lang-ru {
+	display: inline;
+}
+
+body.grf .lang-en {
+	display: none;
 }
