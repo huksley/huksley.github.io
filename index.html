@@ -38,6 +38,7 @@
           </button>
           <a class="navbar-brand" href="index.html">ГАЙНУТДИНОВ.РФ</a>
         </div>
+
         <div id="topnav" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right" role="tablist">
             <li class="active"><a href="#home">Привет</a></li>
@@ -157,23 +158,50 @@
 	<script src="aes.js"></script>
 	<script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
 	<script type="text/javascript">
+		// internet
 		var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
+		// local
+		// var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
 		javascriptKey = CryptoJS.AES.decrypt(javascriptKey, String(window.location));
 		javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
 		Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
 		Parse.Analytics.track("index", { /* free-form fields? */ });
+
+		// Read configuration for site
+		var config = {
+			// gaTracking, location
+		};
+		var Config = Parse.Object.extend("Config");
+		var query = new Parse.Query(Config);
+		query.equalTo("location", String(window.location)).find({
+		  success: function(l) {
+		  	if (window.console) window.console.log(l);
+		  	if (l && l.length && l[0].attributes) {
+		  		config = l[0].attributes;
+		  		Parse.Events.trigger("site:config");
+		  	}
+		  },
+		  error: function(err) {
+		  	if (window.console) window.console.log(err);
+		  }
+		});
 	</script>
 
 	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-67275308-1']);
-		_gaq.push(['_trackPageview']);
+		Parse.Events.on("site:config", function () {
+			var _gaq = _gaq || [];
+			_gaq.push([ '_setAccount', config.gaTracking ]);
+			_gaq.push([ '_trackPageview' ]);
 
-  		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+	  		(function() {
+				var ga = document.createElement('script'); 
+				ga.type = 'text/javascript'; 
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+		});
 	</script>
   </body>
 </html>
