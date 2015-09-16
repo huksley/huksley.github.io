@@ -2,7 +2,7 @@ if (!window.console || !window.console.log) {
 	window.console = {};
 	console.log = function (s) {
 		// no-op
-	}
+	};
 }
 
 if (!window.localStorage) {
@@ -10,11 +10,12 @@ if (!window.localStorage) {
 	localStorage.getItem = function (n) {
 		// no-op
 		return null;
-	}
+	};
+
 	localStorage.setItem = function (n, v) {
 		// no-op
 		return null;
-	}
+	};
 }
 
 // internet
@@ -59,16 +60,15 @@ var Config = Parse.Object.extend("Config");
 var query = new Parse.Query(Config);
 query.equalTo("location", String(loc)).find({
   success: function(l) {
-  	// console.log(l);
-  	if (l && l.length && l[0].attributes) {
-  		config = l[0].attributes;
-  		Parse.Events.trigger("site:config");
-  	} else {
-  		console.log("No config for: " + loc);
-  	}
+	if (l && l.length && l[0].attributes) {
+		config = l[0].attributes;
+		Parse.Events.trigger("site:config");
+	} else {
+		console.log("No config for: " + loc);
+	}
   },
   error: function(err) {
-  	console.log("Error retrieving config from parse.com: " + err);
+	console.log("Error retrieving config from parse.com: " + err);
   }
 });
 
@@ -84,9 +84,9 @@ Parse.Events.on("site:config", function () {
 		_gaq.push([ '_setAccount', config.gaTracking ]);
 		_gaq.push([ '_trackPageview' ]);
 
-  		(function() {
-			var ga = document.createElement('script'); 
-			ga.type = 'text/javascript'; 
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
 			ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0];
@@ -95,18 +95,29 @@ Parse.Events.on("site:config", function () {
 	}
 });
 
-// http://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
+// Using click stored language
 var lang = localStorage.getItem("lang");
 console.log("Language from default storage: " + lang);
 
+// Using from navigator
 if (!lang) {
+	// http://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
 	lang = navigator.languages? navigator.languages[0] : (navigator.language || navigator.userLanguage);
 	lang = String(lang);
 	lang = lang.replace(/-.*/, "");
 	console.log("Language from browser: " + lang);
 }
 
+// Using from hashtag in URL
+var llang = String(window.location);
+if (llang.indexOf("#switch-en") > 0 || llang.indexOf("#en") > 0) {
+	lang = "en";
+}
+if (llang.indexOf("#switch-ru") > 0 || llang.indexOf("#ru") > 0) {
+	lang = "ru";
+}
 
+// Only supporting 2 languages at the moment
 var otherLang = "en";
 if (lang == "en") {
 	otherLang = "ru";
