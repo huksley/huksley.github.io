@@ -21,7 +21,7 @@ if (!window.localStorage) {
 // internet
 var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
 // local
-//var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
+// var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
 var loc = String(window.location);
 if (loc.indexOf("#") > 0) {
 	loc = loc.substring(0, loc.indexOf("#"));
@@ -56,12 +56,19 @@ Parse.Events.on("client:ipinfo", function () {
 var config = {
 	// gaTracking, location
 };
+// Content for site
+var content = [];
+
 var Config = Parse.Object.extend("Config");
+var Content = Parse.Object.extend("Content");
+
+// Load config for this site
 var query = new Parse.Query(Config);
 query.equalTo("location", String(loc)).find({
   success: function(l) {
 	if (l && l.length && l[0].attributes) {
 		config = l[0].attributes;
+		config.objectId = l[0].id;
 		Parse.Events.trigger("site:config");
 	} else {
 		console.log("No config for: " + loc);
@@ -92,6 +99,42 @@ Parse.Events.on("site:config", function () {
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
+	}
+
+	document.title = config.SiteTitle;
+
+	var query = new Parse.Query(Content);
+	console.log("Reading content for " + config.objectId);
+	query.equalTo("ConfigId", { __type: "Pointer", className: "Config", objectId: config.objectId }).find({
+	  success: function(l) {
+		if (l && l.length) {
+			for (var i = 0; i < l.length; i++) {
+				content[content.length] = l[i].attributes;
+			}
+			Parse.Events.trigger("site:content");
+		} else {
+			console.log("No content for: " + config.objectId);
+		}
+	  },
+	  error: function(err) {
+		console.log("Error retrieving content from parse.com: " + err);
+	  }
+	});
+});
+
+Parse.Events.on("site:content", function () {
+	for (var i = 0; i < content.length; i++) {
+		var name = content[i].Name;
+		var value = content[i].Value;
+		var lang = content[i].Lang;
+		var id = lang ? (name + lang) : name;
+		var el = document.getElementById(id);
+		if (el) {
+			console.log("Replacing " + id + " => \"" + value + "\"");
+			el.innerHTML = value;
+		} else {
+			console.log("Can`t find: " + id);
+		}
 	}
 });
 

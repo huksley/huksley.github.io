@@ -9,7 +9,7 @@
 	    <link rel="shortcut icon" href="assets/ico/favicon.ico">
 	    <link rel="x-theme-origin" href="http://blacktie.co/demo/instant/index.html">
 
-	    <title>Гайнутдинов Р.Ф.</title>
+	    <title>...</title>
 
 	    <link href="//yastatic.net/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -33,14 +33,17 @@
 	          <a href="#switch-ru" id="switch-ru" title="Переключиться на Русский"><span class="lang-en"><img src="assets/flags/blank.gif" class="flag flag-us" /></span></a>
 	          <a href="#switch-en" id="switch-en" title="Switch to English"><span class="lang-ru"><img src="assets/flags/blank.gif" class="flag flag-ru" /></span></a>
 			  </span>
-	          <a class="navbar-brand" href="#">ГАЙНУТДИНОВ.РФ</a>
+	          <a class="navbar-brand" href="#" id="SiteName">...</a>
 	        </div>
 
 	        <div id="topnav" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right" role="tablist">
-	            <li class="active"><a href="#home"><span class="lang-ru">Привет</span><span class="lang-en">Hello</span></a></li>
-	            <li><a href="#works"><span class="lang-ru">Работа и проекты</span><span class="lang-en">Work and projects</span></a></li>
-	            <li><a href="#social"><span class="lang-ru">Контакты</span><span class="lang-en">Contacts</span></a></li>
+	            <li class="active"><a href="#home"><span class="lang-ru" id="AboutLinkRU">...</span>
+	            	<span class="lang-en" id="AboutLinkEN">...</span></a></li>
+	            <li><a href="#works"><span class="lang-ru" id="WorkLinkRU">...</span>
+	            	<span class="lang-en" id="WorkLinkEN">...</span></a></li>
+	            <li><a href="#social"><span class="lang-ru" id="ContactLinkRU">...</span>
+	            	<span class="lang-en" id="ContactLinkEN">...</span></a></li>
 	          </ul>
 	        </div><!-- /.nav-collapse -->
 	      </div>
@@ -52,10 +55,13 @@
 					<div class="row">
 						<div class="col-lg-6 col-lg-offset-3">
 							<img id="gravatar" src="https://avatars0.githubusercontent.com/u/1594349?v=3&s=460" width="128"/>
-							<h4><span class="lang-ru">Всем привет, меня зовут</span><span class="lang-en">Hello, my name is</span></h4>
-							<h2><span class="lang-ru">Гайнутдинов Руслан Фархатович</span><span class="lang-en">Gainutdinov Ruslan</span></h2>
-							<h4><span class="lang-ru">Ведущий архитектор</span><span class="lang-en">Lead architect</span></h4>
-							<h4>Enterprise Java · Business Intelligence · Web · SOA</h4>
+							<h4><span class="lang-ru" id="HelloRU">...</span>
+								<span class="lang-en" id="HelloEN">...</span></h4>
+							<h2><span class="lang-ru" id="HelloNameRU">...</span>
+								<span class="lang-en" id="HelloNameEN">...</span></h2>
+							<h4><span class="lang-ru" id="HelloTitleRU">...</span>
+								<span class="lang-en" id="HelloTitleEN">...</span></h4>
+							<h4 id="HelloTech">...</h4>
 						</div>
 					</div><!-- /row -->
 			    </div> <!--  /container -->
@@ -65,7 +71,7 @@
 		<section id="works">
 		<div class="container">
 			<div class="row centered mt mb">
-				<h1><span class="lang-ru">Проекты</span><span class="lang-en">Projects</span></h1>
+				<h1><span class="lang-ru" id="WorkTitleRU">...</span><span class="lang-en" id="WorkTitleEN">...</span></h1>
 				
 				<div class="col-lg-4 col-md-4 col-sm-4 gallery">
 					<div class="dummy"></div>
@@ -73,8 +79,8 @@
 						<a href="http://gazprombank.ru"><img src="http://investor100.ru/wp-content/uploads/2015/06/gazprombank_p.png" class="img-responsive" width="169"></a>
 					</div>
 					<div class="title">
-						<span class="lang-ru">Газпромбанк</span>
-						<span class="lang-en">Gazprombank</span>
+						<span class="lang-ru" id="Work1RU">...</span>
+						<span class="lang-en" id="Work1EN">...</span>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 gallery">
@@ -83,8 +89,8 @@
 						<a href="http://www.thingiverse.com/huksley/designs"><img src="https://avatars1.githubusercontent.com/u/9745417?v=3&amp;s=200" width="159" class="img-responsive"></a>
 					</div>
 					<div class="title">
-						<span class="lang-ru">3D печать</span>
-						<span class="lang-en">3D printing</span>
+						<span class="lang-ru" id="Work2RU">...</span>
+						<span class="lang-en" id="Work2EN">...</span>
 					</div>	
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 gallery">
@@ -92,57 +98,56 @@
 					<div class="img-container">
 						<a href="http://github.com/huksley"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" width="159" class="img-responsive"></a>
 					</div>
-					<div class="title">
-						Open-Source
-					</div>
+					<div class="title" id="Work3">...</div>
 				</div>
 			</div><!--/row -->
 		</div><!--/container -->
 		</section>
 
 		<div id="social">			
-			<h1><span class="lang-ru">Контакты</span><span class="lang-en">Contacts</span></h1>
+			<h1><span class="lang-ru" id="ContactTitleRU">...</span>
+				<span class="lang-en" id="ContactTitleEN">...</span></h1>
 
 			<div class="container">
 				<div id="links" class="row centered mt bt">
 					<div class="col-lg-3">
 						<a href="https://ru.linkedin.com/in/ruslanfg"><i class="fa fa-linkedin"></i></a>
 						<div>
-							<span class="lang-ru">Посмотреть профиль на </span>
+							<span class="lang-ru" id="ContactLinkedInRU">...</span>
 							<a href="https://ru.linkedin.com/in/ruslanfg">LinkedIn</a>
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<a href="https://github.com/huksley"><i class="fa fa-github"></i></a>
 						<div>
-							<span class="lang-ru">Посмотреть профиль на </span>
+							<span class="lang-ru" id="ContactGithubRU">...</span>
 							<a href="https://github.com/huksley">Github</a>
 						</div>
 					</div>
 					<div class="col-lg-3">
-						<a href="mailto:ruslanfg@gmail.com"><i class="fa fa-envelope"></i></a>
+						<i class="fa fa-envelope"></i>
 						<div>
-							<span class="lang-ru">
-								Написать <a href="mailto:ruslanfg@gmail.com">письмо</a>
+							<span class="lang-ru" id="ContactMailRU">
+								...
 							</span>
-							<span class="lang-en">
-								<a href="mailto:ruslanfg@gmail.com">E-mail</a>
+							<span class="lang-en" id="ContactMailEN">
+								...
 							</span>
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<span class="lang-ru">
-							<a href="mailto:ruslanfg@gmail.com?subject=Резюме"><i class="fa fa-wrench"></i></a>
+							<i class="fa fa-wrench"></i>
 						</span>
 						<span class="lang-en">
-							<a href="mailto:ruslanfg@gmail.com?subject=CV"><i class="fa fa-wrench"></i></a>
+							<i class="fa fa-wrench"></i>
 						</span>
 						<div>
-							<span class="lang-ru">
-								Резюме по <a href="mailto:ruslanfg@gmail.com?subject=Резюме">запросу</a>
+							<span class="lang-ru" id="ContactCVRU">
+								...
 							</span>
-							<span class="lang-en">
-								Ask me for a <a href="mailto:ruslanfg@gmail.com?subject=CV">CV</a>
+							<span class="lang-en" id="ContactCVEN">
+								...
 							</span>
 						</div>
 					</div>
@@ -154,14 +159,16 @@
 			<div class="container">
 				<div class="row centered">
 					<div class="col-lg-4">
-						<p><span class="lang-ru">Разработчик, архитектор, исследователь</span><span class="lang-en">Developer, architect, avid learner</span></p>
+						<p><span class="lang-ru" id="AboutMottoRU">...</span>
+							<span class="lang-en" id="AboutMottoEN">...</span></p>
 					</div>
 				
 					<div class="col-lg-4">
-						<p><span class="lang-ru">Живу и работаю в Москве</span><span class="lang-en">Living in Moscow, Russia</span></p>
+						<p><span class="lang-ru" id="AboutPlaceRU">...</span>
+							<span class="lang-en" id="AboutPlaceEN">...</span></p>
 					</div>
 					<div class="col-lg-4">
-						<p><a href="mailto:ruslanfg@gmail.com">ruslanfg@gmail.com</a></p>
+						<p id="AboutEMail"></p>
 					</div>
 				</div>
 			</div>
