@@ -253,3 +253,8 @@ body.grf .lang-ru {
 body.grf .lang-en {
 	display: none;
 }
+
+body.grf .navbar-brand {
+	padding-left: 0px;
+	margin-left: 0px !important;
+}
