@@ -18,39 +18,13 @@ if (!window.localStorage) {
 	};
 }
 
-// internet
-var javascriptKey = "U2FsdGVkX19G57C2sP5BZosD2b0PreenKwYpc/Nu1i3ADGe3zT67i9Mvuxx9GBL6Oe9SDFbbqCmEIhx8YMdAOQ==";
-// local
-// var javascriptKey = "U2FsdGVkX1+5Avf/T6m1aYs4KPH1JOhbfXFOuhgzg2/bxbd5pmyQFl8A/ZhGBAWVXEHlx0vJdAKl1xJFOguIzA==";
-var loc = String(window.location);
-if (loc.indexOf("#") > 0) {
-	loc = loc.substring(0, loc.indexOf("#"));
-}
-console.log("Location: " + loc);
-try {
-	javascriptKey = CryptoJS.AES.decrypt(javascriptKey, loc);
-	javascriptKey = javascriptKey.toString(CryptoJS.enc.Utf8);
-} catch (e) {
-	console.log("Failed JS key decryption: " + e);
-}
-
-try {
-	Parse.initialize("K6BVY3jjA1T6Q2ZOH7qc88grIPhkKW0WdRzD7qKf", javascriptKey);
-} catch (e) {
-	console.log("Failed parse.com API initialization: " + e);
-}
-
 var ipinfo = {};
 $.get("http://ipinfo.io", function(response) {
 	ipinfo = response;
 	console.log("Got ipinfo ", ipinfo);
-	Parse.Events.trigger("client:ipinfo");
+	$.event.trigger("client:ipinfo");
 }, "jsonp");
 
-Parse.Events.on("client:ipinfo", function () {
-	console.log("Sending track event to Parse.com");
-	Parse.Analytics.track("index", ipinfo);
-});
 
 // Read configuration for site
 var config = {
@@ -59,31 +33,20 @@ var config = {
 // Content for site
 var content = [];
 
-var Config = Parse.Object.extend("Config");
-var Content = Parse.Object.extend("Content");
-
-// Load config for this site
-var query = new Parse.Query(Config);
-query.equalTo("location", String(loc)).find({
-  success: function(l) {
-	if (l && l.length && l[0].attributes) {
-		config = l[0].attributes;
-		config.objectId = l[0].id;
-		Parse.Events.trigger("site:config");
-	} else {
-		console.log("No config for: " + loc);
+$.get("http://wzdev.ru/wiki/api/grf.js", function(json, xhr) {
+	console.log("Got content", json);
+	window.content = json;
+	for (var i = 0; i < json.length; i++) {
+		window.config[json[i].name] = json[i].value;
 	}
-  },
-  error: function(err) {
-	console.log("Error retrieving config from parse.com: " + err);
-  }
+	$.event.trigger("site:config");
 });
 
-Parse.Events.on("site:config", function () {
+$(document).on("site:config", function () {
 	console.log("Config " + config.gaTracking + ", " + config.location);
 });
 
-Parse.Events.on("site:config", function () {
+$(document).on("site:config", function () {
 	if (config.gaTracking) {
 		console.log("Sending event to Google Analytics " + config.gaTracking);
 
@@ -102,32 +65,14 @@ Parse.Events.on("site:config", function () {
 	}
 
 	document.title = config.SiteTitle;
-
-	var query = new Parse.Query(Content);
-	console.log("Reading content for " + config.objectId);
-	query.equalTo("ConfigId", { __type: "Pointer", className: "Config", objectId: config.objectId }).find({
-	  success: function(l) {
-		if (l && l.length) {
-			for (var i = 0; i < l.length; i++) {
-				content[content.length] = l[i].attributes;
-			}
-			Parse.Events.trigger("site:content");
-		} else {
-			console.log("No content for: " + config.objectId);
-		}
-	  },
-	  error: function(err) {
-		console.log("Error retrieving content from parse.com: " + err);
-	  }
-	});
+	$.event.trigger("site:content");
 });
 
-Parse.Events.on("site:content", function () {
+$(document).on("site:content", function () {
 	for (var i = 0; i < content.length; i++) {
-		var name = content[i].Name;
-		var value = content[i].Value;
-		var lang = content[i].Lang;
-		var id = lang ? (name + lang) : name;
+		var name = content[i].name;
+		var value = content[i].value;
+		var id = name;
 		var el = document.getElementById(id);
 		if (el) {
 			console.log("Replacing " + id + " => \"" + value + "\"");
