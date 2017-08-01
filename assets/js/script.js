@@ -73,6 +73,11 @@ $(document).on("site:content", function () {
 		} else {
 			console.log("Can`t find: " + id);
 		}
+
+		var lel = document.getElementById(id + "-href");
+		if (lel) {
+			$(lel).attr("href", value);
+		}
 	}
 });
 
@@ -83,7 +88,7 @@ console.log("Language from default storage: " + lang);
 // Using from navigator
 if (!lang) {
 	// http://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
-	lang = navigator.languages? navigator.languages[0] : (navigator.language || navigator.userLanguage);
+	lang = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
 	lang = String(lang);
 	lang = lang.replace(/-.*/, "");
 	console.log("Language from browser: " + lang);
