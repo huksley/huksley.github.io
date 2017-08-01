@@ -17,15 +17,7 @@ if (!window.localStorage) {
 		return null;
 	};
 }
-
-var ipinfo = {};
-$.get("http://ipinfo.io", function(response) {
-	ipinfo = response;
-	console.log("Got ipinfo ", ipinfo);
-	$.event.trigger("client:ipinfo");
-}, "jsonp");
-
-
+                            
 // Read configuration for site
 var config = {
 	// gaTracking, location
@@ -33,7 +25,7 @@ var config = {
 // Content for site
 var content = [];
 
-$.get("http://wzdev.ru/wiki/api/grf.js", function(json, xhr) {
+$.get("http://api.wzdev.ru/grf.js", function(json, xhr) {
 	console.log("Got content", json);
 	window.content = json;
 	for (var i = 0; i < json.length; i++) {
@@ -54,14 +46,15 @@ $(document).on("site:config", function () {
 		_gaq.push([ '_setAccount', config.gaTracking ]);
 		_gaq.push([ '_trackPageview' ]);
 
-		(function() {
+		window.setTimeout(function() {
 			var ga = document.createElement('script');
 			ga.type = 'text/javascript';
 			ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0];
+			console.log("Got script: " + s);
 			s.parentNode.insertBefore(ga, s);
-		})();
+		}, 10);
 	}
 
 	document.title = config.SiteTitle;
