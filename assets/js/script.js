@@ -25,7 +25,7 @@ var config = {
 // Content for site
 var content = [];
 
-$.get("http://api.wzdev.ru/grf.js", function(json, xhr) {
+$.get("https://api.wzdev.ru/grf.js", function(json, xhr) {
 	console.log("Got content", json);
 	window.content = json;
 	for (var i = 0; i < json.length; i++) {
